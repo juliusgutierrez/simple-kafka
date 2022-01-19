@@ -3,7 +3,7 @@ package config;
 public class KafkaConfig {
 
   public static final String BOOTSTRAPSERVER = "localhost:9092";
-  public static final String TOPIC = "Twitter-Kafka";
+  public static final String TOPIC = "PSE-Kafka";
   public static final String ACKS_CONFIG = "all";
   public static final String MAX_IN_FLIGHT_CONN = "5";
   public static final String COMPRESSION_TYPE = "snappy";
