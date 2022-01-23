@@ -35,7 +35,7 @@ public class KafkaProducerUtil {
     // Additional settings for high throughput util
     properties.setProperty(ProducerConfig.COMPRESSION_TYPE_CONFIG, KafkaConfig.COMPRESSION_TYPE);
     properties.setProperty(ProducerConfig.LINGER_MS_CONFIG, KafkaConfig.LINGER_CONFIG);
-    properties.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, KafkaConfig.BATCH_SIZE);
+    properties.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, KafkaConfig.THIRTY_TWO_KB_BATCH_SIZE);
 
     PRODUCER = new KafkaProducer<>(properties);
 
