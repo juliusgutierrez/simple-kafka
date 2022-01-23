@@ -10,12 +10,6 @@ public class KafkaProducerUtil {
 
   private static final KafkaProducer<String, String> PRODUCER;
 
-  /**
-   * Prevent utility to instantiate
-   */
-  private KafkaProducerUtil() {
-  }
-
   static {
     // Create util properties
     Properties properties = new Properties();
@@ -39,6 +33,12 @@ public class KafkaProducerUtil {
 
     PRODUCER = new KafkaProducer<>(properties);
 
+  }
+
+  /**
+   * Prevent utility to instantiate
+   */
+  private KafkaProducerUtil() {
   }
 
   public static KafkaProducer<String, String> getKafkaProducer() {

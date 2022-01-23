@@ -9,13 +9,6 @@ public class KafkaConsumerUtil {
 
   private static KafkaConsumer CONSUMER;
 
-  /**
-   * Prevent utility to instantiate
-   */
-  private KafkaConsumerUtil() {
-
-  }
-
   static {
     Properties properties = new Properties();
 
@@ -28,6 +21,13 @@ public class KafkaConsumerUtil {
     properties.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
     CONSUMER = new KafkaConsumer<String, String>(properties);
+
+  }
+
+  /**
+   * Prevent utility to instantiate
+   */
+  private KafkaConsumerUtil() {
 
   }
 

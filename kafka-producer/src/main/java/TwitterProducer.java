@@ -9,25 +9,18 @@ import com.twitter.hbc.core.processor.StringDelimitedProcessor;
 import com.twitter.hbc.httpclient.auth.Authentication;
 import com.twitter.hbc.httpclient.auth.OAuth1;
 import config.TwitterConfig;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.TimeUnit;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import util.KafkaProducerUtil;
 
 public class TwitterProducer extends BaseProducer {
 
 
+  private static String TOPIC = "Twitter-Kafka";
   final Logger logger = LoggerFactory
       .getLogger(TwitterProducer.class);
-
   private List<String> trackTerms = Lists.newArrayList("kafka");
-  private static String TOPIC = "Twitter-Kafka";
 
   public TwitterProducer() {
     super(TOPIC);

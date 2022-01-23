@@ -43,7 +43,7 @@ public abstract class BaseProducer {
     //make api call
     makeAPICall();
 
-    logger.info("sending to producer :" +  topic);
+    logger.info("sending to producer :" + topic);
     //send to producer
     sendToProducer();
   }

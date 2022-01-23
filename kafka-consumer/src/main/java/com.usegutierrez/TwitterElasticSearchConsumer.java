@@ -1,7 +1,6 @@
 package com.usegutierrez;
 
 import com.google.gson.JsonParser;
-import com.usegutierrez.config.PSEConsumerConfig;
 import com.usegutierrez.config.TwitterConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.elasticsearch.action.index.IndexRequest;
@@ -32,7 +31,7 @@ public class TwitterElasticSearchConsumer extends ESBaseConsumer {
       return null;
     }
 
-    if (null != id && null != record.value() ) {
+    if (null != id && null != record.value()) {
       return new IndexRequest(TwitterConsumerConfig.INDEX, "_doc", id)
           .source(record.value().toString(), XContentType.JSON);
     } else {

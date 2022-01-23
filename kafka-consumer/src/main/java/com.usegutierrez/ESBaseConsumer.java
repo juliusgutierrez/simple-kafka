@@ -25,16 +25,14 @@ import org.slf4j.LoggerFactory;
 
 public abstract class ESBaseConsumer {
 
+  private static final Logger LOGGER =
+      LoggerFactory.getLogger(PSEElasticSearchConsumer.class.getName());
   private String topic;
 
   protected ESBaseConsumer(String topic) {
     Validate.notNull(topic, "Topic should not be null");
     this.topic = topic;
   }
-
-  private static final Logger LOGGER =
-      LoggerFactory.getLogger(PSEElasticSearchConsumer.class.getName());
-
 
   public static RestHighLevelClient createClient() {
 
