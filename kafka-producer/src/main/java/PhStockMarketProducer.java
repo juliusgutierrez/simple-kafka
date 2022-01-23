@@ -13,70 +13,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import util.KafkaProducerUtil;
 
-public class PhStockMarketProducer {
+public class PhStockMarketProducer extends BaseProducer {
 
   private static final Logger logger = LoggerFactory.getLogger(PhStockMarketProducer.class);
   private static final String URL = "http://pseapi.com/api/Sector/03-15-2018";
-  private BlockingQueue<String> msgQueue = new LinkedBlockingQueue<>(100000);
+  private static final String TOPIC = "PSE-Kafka";
 
-  private KafkaProducer<String, String> producer;
+  public PhStockMarketProducer() {
+    super(TOPIC, URL);
+  }
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     new PhStockMarketProducer().run();
-  }
-
-
-  public void run() throws Exception {
-    logger.info("Setting up!");
-
-    //call producer
-    setUpProducer();
-
-    //call stock ph
-    makeStockPhRequest();
-
-    //send phstock market to producer
-    sendToProducer();
-  }
-
-  private void setUpProducer() {
-    producer = KafkaProducerUtil.getKafkaProducer();
-  }
-
-  private void makeStockPhRequest()
-      throws URISyntaxException, java.io.IOException, InterruptedException {
-
-    var request = HttpRequest.newBuilder()
-        .uri(new URI(URL))
-        .GET()
-        .build();
-
-    var response = HttpClient.newBuilder()
-        .build()
-        .send(request, BodyHandlers.ofString());
-
-    msgQueue.add(response.body());
-  }
-
-  private void sendToProducer() {
-    String msg = null;
-    while (true) {
-      try {
-        msg = msgQueue.poll(5, TimeUnit.SECONDS);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-      if (msg != null) {
-        logger.info(msg);
-        producer.send(
-            new ProducerRecord<>(KafkaConfig.TOPIC, msg), (recordMetadata, e) -> {
-              if (e != null) {
-                logger.error("Some error OR something bad happened", e);
-              }
-            }
-        );
-      }
-    }
   }
 
 }
